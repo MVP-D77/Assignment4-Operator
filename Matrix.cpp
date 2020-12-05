@@ -90,7 +90,7 @@ Matrix::~Matrix() {
     else {
 //        mutex m;
 //        m.lock();
-        (*counter) +=1;
+        (*counter) -=1;
 //        m.unlock();
     }
 }
