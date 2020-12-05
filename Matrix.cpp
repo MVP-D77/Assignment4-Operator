@@ -101,12 +101,15 @@ Matrix & Matrix::operator=(const Matrix &matrix) {
     if(*(counter) == 1)  {
         delete counter;
         delete [] valueItem ;
+    }else if(*(counter)==0){
+        delete counter;
     }
     else (*counter)--;
 
     this->counter = matrix.counter;
     this->rowNumber = matrix.rowNumber;
     this->columnNumber = matrix.columnNumber;
+    this->valueItem = matrix.valueItem;
     (*counter)++;
     return *this;
 }
