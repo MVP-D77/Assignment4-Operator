@@ -3,6 +3,8 @@
 //
 
 #include "Matrix.hpp"
+mutex m;
+
 void testCorrect(Matrix & matrix){
     for(int i=0;i<10000;i++){
         Matrix a (matrix);
@@ -38,8 +40,8 @@ float dotProduct(const float *p1, const float * p2, size_t n, size_t temp)
 }
 
 Matrix::Matrix() :rowNumber(0),columnNumber(0),valueItem(nullptr){
-//    counter = new int;
-    counter = new atomic_int;
+    counter = new int;
+//    counter = new atomic_int;
     *(counter) = 0;
 }
 
@@ -52,8 +54,8 @@ Matrix::Matrix(int rowNumber, int columnNumber,float * value) {
             *(this->valueItem+i) = *(value+i);
         }
     }
-//    counter = new int;
-    counter = new atomic_int;
+    counter = new int;
+//    counter = new atomic_int;
     *(counter) = 1;
 }
 
@@ -63,9 +65,9 @@ Matrix::Matrix(const Matrix &matrix) {
     this->valueItem = matrix.valueItem;
     this->counter = matrix.counter;
 //    mutex m;
-//    m.lock();
+    m.lock();
     (*counter) +=1;
-//    m.unlock();
+    m.unlock();
 }
 
 
@@ -88,10 +90,10 @@ Matrix::~Matrix() {
     }
     else {
 //        mutex m;
-//
-//        m.lock();
+
+        m.lock();
         (*counter) -=1;
-//        m.unlock();
+        m.unlock();
     }
 }
 
