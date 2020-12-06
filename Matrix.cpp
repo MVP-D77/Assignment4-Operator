@@ -53,7 +53,6 @@ Matrix::Matrix(int rowNumber, int columnNumber,float * value) {
         }
     }
 //    counter = new int;
-
     counter = new atomic_int;
     *(counter) = 1;
 }
@@ -89,6 +88,7 @@ Matrix::~Matrix() {
     }
     else {
 //        mutex m;
+//
 //        m.lock();
         (*counter) -=1;
 //        m.unlock();
@@ -349,7 +349,6 @@ Matrix operator ~(const Matrix &matrix){
         cout<<"Matrix is not full rank,it has no inverse!!"<<endl;
         exit(0);
     }
-
     float * resultValue = new float [num*num]();
     float * tempValue = new float [(num-1)*(num-1)]();
     for(int i=0;i<num;i++){
@@ -364,7 +363,6 @@ Matrix operator ~(const Matrix &matrix){
             resultValue [i*num+j] = (i+j)%2==0?1/A*getA(num-1,tempValue):-1/A*getA(num-1,tempValue);
         }
     }
-
     delete [] tempValue;
     Matrix resultMatrix =  Matrix (num,num,resultValue);
     resultMatrix.transposition();

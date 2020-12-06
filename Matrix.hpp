@@ -16,6 +16,7 @@ private:
     int rowNumber;
     int columnNumber;
     float * valueItem;
+//    int * counter;
     atomic_int * counter;
 
 public:
